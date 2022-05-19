@@ -1,0 +1,84 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id "io.freefair.lombok" version "6.3.0"
+    id 'maven-publish'
+}
+
+project.version = 0.1
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
+}
+
+configurations.archives.artifacts.clear()
+artifacts {
+    add("archives", shadowJar)
+}
+
+
+publishing {
+    publications {
+        shadow(MavenPublication) { publication ->
+            project.shadow.component(publication)
+        }
+    }
+    repositories {
+        maven {
+            url = "https://maven.pkg.github.com/Kapperchino/Stream-Client"
+            credentials {
+                username = project.properties['usr']
+                password = project.properties['pwd']
+            }
+        }
+    }
+}
+
+
+repositories {
+    maven {
+        url = "https://maven.pkg.github.com/Kapperchino/StreamDep"
+        credentials {
+            username = project.properties['usr']
+            password = project.properties['pwd']
+        }
+    }
+    maven {
+        url = "https://maven.pkg.github.com/Kapperchino/Stream"
+        credentials {
+            username = project.properties['usr']
+            password = project.properties['pwd']
+        }
+    }
+    maven {
+        url = "https://maven.pkg.github.com/Kapperchino/Stream-Infra"
+        credentials {
+            username = project.properties['usr']
+            password = project.properties['pwd']
+        }
+    }
+}
+
+dependencies {
+    implementation('Stream:client:0.173')
+    implementation project(path: ':models', configuration: 'shadow')
+    implementation "kapperchino:stream-deps:0.33"
+    implementation('Stream-infra:client:0.123')
+}
+
+
+shadowJar {
+    minimize()
+    mergeServiceFiles()
+    project.configurations.implementation.canBeResolved = true
+    configurations = [project.configurations.implementation]
+    archiveBaseName.set('stream-client')
+    archiveClassifier.set('')
+    archiveVersion.set(project.version as String)
+}
