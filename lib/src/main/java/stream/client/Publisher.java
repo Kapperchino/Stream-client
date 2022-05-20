@@ -83,6 +83,7 @@ public class Publisher {
                 topicMap.put(k, v);
             }
         });
+        index.set(newState.getIndex());
     }
 
     private void addShardGroup(GetStateResponseOuterClass.ShardGroup shardGroup) {

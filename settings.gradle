@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'stream-client'
-include('lib', 'models')
+include('lib', 'models','app')
