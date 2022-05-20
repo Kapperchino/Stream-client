@@ -27,7 +27,7 @@ repositories {
 
 dependencies {
     implementation "kapperchino:stream-deps:0.33"
-    implementation('Stream-infra:client:0.123')
+    implementation('Stream-infra:client:0.124')
     implementation('Stream:client:0.173')
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2.2'
     implementation 'org.projectlombok:lombok:1.18.20'

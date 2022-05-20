@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
@@ -33,11 +34,14 @@ public class Publisher {
     Map<String, ShardGroup> shardGroupMap;
     Map<String, GetStateResponseOuterClass.Topic> topicMap;
     ScheduledExecutorService stateRefresher;
+    AtomicLong index;
 
     public Publisher(RaftClient raftClient) {
+        index = new AtomicLong(0);
         infraClient = new InfraClient(raftClient);
         var res = infraClient.getState(0);
         var state = res.getState();
+        index.set(state.getIndex());
         topicMap = new ConcurrentHashMap<>(state.getTopicsMap());
         shardGroupMap = new ConcurrentHashMap<>();
         state.getShardGroupsMap().forEach((k, v) -> {
@@ -45,7 +49,7 @@ public class Publisher {
         });
         stateRefresher = new ScheduledThreadPoolExecutor(1);
         stateRefresher.scheduleAtFixedRate(() -> {
-            var response = infraClient.getState(0);
+            var response = infraClient.getState(index.get());
             if (response.hasIndex()) {
                 log.info("State is the same, no need to update");
                 return;
