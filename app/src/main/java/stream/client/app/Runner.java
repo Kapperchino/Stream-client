@@ -15,13 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package stream.app;
+package stream.client.app;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
 import org.apache.ratis.util.JavaUtils;
-import stream.app.cli.ClientCli;
-import stream.app.cli.SubCommandBase;
+import stream.client.app.cli.ClientCli;
+import stream.client.app.cli.SubCommandBase;
 
 import java.util.List;
 import java.util.Optional;

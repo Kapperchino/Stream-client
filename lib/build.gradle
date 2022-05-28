@@ -74,7 +74,6 @@ dependencies {
 
 
 shadowJar {
-    minimize()
     mergeServiceFiles()
     project.configurations.implementation.canBeResolved = true
     configurations = [project.configurations.implementation]

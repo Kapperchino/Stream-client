@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package stream.app.cli;
+package stream.client.app.cli;
 
 import com.beust.jcommander.Parameter;
 import org.apache.ratis.protocol.RaftPeer;

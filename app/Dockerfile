@@ -27,7 +27,7 @@ ENV PATH $PATH:/opt/ratis/bin
 RUN apt-get install -y jsvc
 ENV JSVC_HOME=/usr/bin
 
-COPY build/libs/stream-infra-0.1-all.jar home/build/libs/stream-infra-0.1-all.jar
+COPY build/libs/app-0.1.jar home/build/libs/app-0.1.jar
 COPY bin/ /home/bin
 
 RUN addgroup --gid 1000 ratis

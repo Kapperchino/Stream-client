@@ -1,4 +1,4 @@
-package stream.app.cli;
+package stream.client.app.cli;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,7 @@ public final class ClientCli {
 
     public static List<SubCommandBase> getSubCommands() {
         List<SubCommandBase> commands = new ArrayList<>();
+        commands.add(new Publish());
         return commands;
     }
 }

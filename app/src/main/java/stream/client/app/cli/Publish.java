@@ -1,9 +1,8 @@
-package stream.app.cli;
+package stream.client.app.cli;
 
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ratis.RaftConfigKeys;
 import org.apache.ratis.client.RaftClient;
@@ -23,14 +22,9 @@ import org.apache.ratis.util.SizeInBytes;
 import org.apache.ratis.util.TimeDuration;
 import stream.client.Publisher;
 import stream.models.proto.record.RecordOuterClass;
-import streamInfra.client.BaseClient;
-import streamInfra.client.InfraClient;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**

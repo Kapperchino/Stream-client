@@ -63,12 +63,11 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'StreamInfra.app.Runner'
+    mainClass = 'stream.client.app.Runner'
 }
 
 shadowJar {
     mergeServiceFiles()
-    minimize()
     project.configurations.implementation.canBeResolved = true
     configurations = [project.configurations.implementation]
     archiveBaseName.set('app')
